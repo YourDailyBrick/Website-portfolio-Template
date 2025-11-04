@@ -3,8 +3,8 @@
     --color-black: #0a0a0a;           /* Deepest Black for background */
     --color-dark-gray: #1e1e1e;       /* Dark Gray for containers */
     --color-dark-blue: #1e2a38;       /* Dark Navy Blue for accents/footer */
-    --color-text-light: #f0f0f0;      /* Near White for main text */
-    --color-accent: #00bcd4;          /* Bright Cyan/Blue for highlights */
+    --color-text-light: #f0f0f0;      /* Near White for main text (Used for logo now) */
+    --color-accent: #00bcd4;          /* Bright Cyan/Blue (Used for button and hover) */
     --color-text-header: #4a8993;     /* Subtler, darker blue for header text/glow */
     --color-accent-dark: #0097a7;     /* Darker accent for hover */
 }
@@ -50,10 +50,11 @@ body {
 }
 
 #navbar .logo {
-    font-size: 1.5em;
+    /* UPDATED: Larger font and changed color to match general text */
+    font-size: 1.8em; /* Increased size */
     font-weight: 700;
     letter-spacing: 1px;
-    color: var(--color-accent); 
+    color: var(--color-text-light); /* Changed from accent to light text color */
 }
 
 #navbar ul {
@@ -178,8 +179,9 @@ body {
 /* --- Styling for the Discord Button on the Links Page --- */
 .btn-discord {
     display: inline-block;
-    background-color: #5865F2; /* Official Discord Blue */
-    color: var(--color-text-light);
+    /* UPDATED: Background color changed to match accent color */
+    background-color: var(--color-accent); 
+    color: var(--color-dark-blue); /* Dark text on the bright button */
     padding: 15px 30px;
     margin: 20px 0;
     text-decoration: none;
@@ -187,11 +189,11 @@ body {
     font-size: 1.2em;
     font-weight: 700;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3); /* Soft glow shadow */
 }
 
 .btn-discord:hover {
-    background-color: #4854c8; 
+    background-color: var(--color-accent-dark); 
     transform: translateY(-2px);
 }
 
