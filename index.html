@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,6 +15,7 @@
             <ul>
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#" id="projects-link">Projects</a></li>
+                <li><a href="#" id="links-link">Links</a></li>
             </ul>
         </div>
     </nav>
@@ -21,31 +23,63 @@
     <header id="home" class="main-header">
         <div class="header-content">
             <h1>I will put your name here</h1>
-            <p>A simple, clean, and responsive landing page design.</p>
+            <p>A simple, clean, and professional landing page design.</p>
         </div>
     </header>
 
     <div id="projects-overlay" class="overlay">
         <div class="overlay-content">
-            <button id="close-overlay">&times;</button>
+            <button class="close-overlay">&times;</button>
             <h2>Projects</h2>
             <p class="coming-soon">COMING SOON</p>
             <p>Check back later for updates on my latest work!</p>
         </div>
     </div>
 
-    <script>
-        const projectsLink = document.getElementById('projects-link');
-        const projectsOverlay = document.getElementById('projects-overlay');
-        const closeOverlayButton = document.getElementById('close-overlay');
+    <div id="links-overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="close-overlay">&times;</button>
+            <h2>Links</h2>
+            <a href="#" class="btn-discord">Discord Server</a>
+            <p>More links coming soon!</p>
+        </div>
+    </div>
 
+    <script>
+        // Select all necessary elements
+        const projectsLink = document.getElementById('projects-link');
+        const linksLink = document.getElementById('links-link');
+        const projectsOverlay = document.getElementById('projects-overlay');
+        const linksOverlay = document.getElementById('links-overlay');
+        const closeButtons = document.querySelectorAll('.close-overlay');
+
+        // Function to open an overlay
+        function openOverlay(overlayElement) {
+            overlayElement.style.display = 'flex';
+        }
+
+        // Function to close an overlay
+        function closeOverlay(overlayElement) {
+            overlayElement.style.display = 'none';
+        }
+
+        // Event listeners for opening
         projectsLink.addEventListener('click', (e) => {
-            e.preventDefault(); // Stop the link from trying to navigate
-            projectsOverlay.style.display = 'flex'; // Show the overlay
+            e.preventDefault();
+            openOverlay(projectsOverlay);
         });
 
-        closeOverlayButton.addEventListener('click', () => {
-            projectsOverlay.style.display = 'none'; // Hide the overlay
+        linksLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openOverlay(linksOverlay);
+        });
+
+        // Event listener for closing (applies to both close buttons)
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // The parent of the button is the overlay, so we hide it
+                closeOverlay(button.closest('.overlay'));
+            });
         });
     </script>
 
