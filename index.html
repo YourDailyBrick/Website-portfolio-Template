@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container">
+            <h1 class="logo">MyPage</h1>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#" id="projects-link">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="main-header">
+        <div class="header-content">
+            <h1>I will put your name here</h1>
+            <p>A simple, clean, and responsive landing page design.</p>
+        </div>
+    </header>
+
+    <div id="projects-overlay" class="overlay">
+        <div class="overlay-content">
+            <button id="close-overlay">&times;</button>
+            <h2>Projects</h2>
+            <p class="coming-soon">COMING SOON</p>
+            <p>Check back later for updates on my latest work!</p>
+        </div>
+    </div>
+
+    <script>
+        const projectsLink = document.getElementById('projects-link');
+        const projectsOverlay = document.getElementById('projects-overlay');
+        const closeOverlayButton = document.getElementById('close-overlay');
+
+        projectsLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop the link from trying to navigate
+            projectsOverlay.style.display = 'flex'; // Show the overlay
+        });
+
+        closeOverlayButton.addEventListener('click', () => {
+            projectsOverlay.style.display = 'none'; // Hide the overlay
+        });
+    </script>
+
+</body>
+</html>
