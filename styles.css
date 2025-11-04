@@ -1,3 +1,13 @@
+/* --- Color Palette --- */
+:root {
+    --color-black: #0a0a0a;           /* Deepest Black for background */
+    --color-dark-gray: #1e1e1e;       /* Dark Gray for containers */
+    --color-dark-blue: #1e2a38;       /* Dark Navy Blue for accents/footer */
+    --color-text-light: #f0f0f0;      /* Near White for main text */
+    --color-accent: #00bcd4;          /* Bright Cyan/Blue for highlights */
+    --color-accent-dark: #0097a7;     /* Darker accent for hover */
+}
+
 /* Basic Reset and Global Styles */
 * {
     box-sizing: border-box;
@@ -6,69 +16,30 @@
 }
 
 body {
-    /* Use the professional 'Montserrat' font */
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
-    color: #fff; /* White text for the dark background */
+    color: var(--color-text-light); /* Light text on dark background */
+    background-color: var(--color-black); /* Main background color */
+    overflow-x: hidden; 
 }
 
 /* Reusable container for layout centering */
 .container {
-    width: 90%; /* Slightly wider container for cleaner look */
+    width: 90%;
     max-width: 1200px;
     margin: auto;
     overflow: hidden;
 }
 
-/* --- Gradient Background (Used for Header and Overlays) --- */
-/* Your specified gradient: blue to purple */
-.gradient-bg {
-    /* Main Gradient Block */
-    background: linear-gradient(90deg, #34a4eb 0%, #202285 85%); 
-}
-
-/* --- Main Landing Section (Header) --- */
-.main-header {
-    height: 100vh; /* Full viewport height */
-    display: flex;
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    text-align: center;
-}
-
-/* Apply the gradient to the header */
-.main-header,
-#projects-overlay,
-#links-overlay {
-    /* Apply the custom gradient to all main background elements */
-    /* This uses the hexadecimal approximations of your HSLA values */
-    background: linear-gradient(90deg, #4193a5 0%, #210cae 85%);
-}
-
-.header-content h1 {
-    font-size: 5em; /* Larger and bolder title */
-    font-weight: 700;
-    margin-bottom: 0.1em;
-    letter-spacing: -1px; /* Tighter spacing for modern look */
-}
-
-.header-content p {
-    font-size: 1.4em;
-    font-weight: 300; /* Light weight for a clean subtext */
-    opacity: 0.8;
-}
-
-
 /* --- Navigation Bar Styling --- */
 #navbar {
-    /* Using the deep blue/purple for the navbar background */
-    background-color: #202285; 
-    color: #fff;
-    padding: 20px 0; /* More vertical padding for professional feel */
+    background-color: var(--color-dark-gray); /* Dark gray navigation */
+    padding: 20px 0; 
     position: absolute;
     width: 100%;
     top: 0;
     z-index: 10; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
 }
 
 #navbar .container {
@@ -81,6 +52,7 @@ body {
     font-size: 1.5em;
     font-weight: 700;
     letter-spacing: 1px;
+    color: var(--color-accent); /* Logo uses the bright accent color */
 }
 
 #navbar ul {
@@ -89,25 +61,66 @@ body {
 }
 
 #navbar ul li {
-    margin-left: 30px; /* More space between links */
+    margin-left: 30px; 
 }
 
 #navbar ul li a {
-    color: #fff;
+    color: var(--color-text-light);
     text-decoration: none;
     font-weight: 400;
-    padding: 5px 0; /* Clean, borderless links */
+    padding: 5px 0;
     opacity: 0.8;
-    transition: opacity 0.3s;
+    transition: all 0.3s;
 }
 
 #navbar ul li a:hover,
 #navbar ul li a.active {
     opacity: 1;
-    /* Subtle underline on hover for a cleaner effect than background change */
-    border-bottom: 2px solid #fff;
+    color: var(--color-accent); /* Accent color on hover */
+    border-bottom: 2px solid var(--color-accent);
 }
 
+
+/* --- Main Landing Section (Header) --- */
+.main-header {
+    /* Subtle Dark Gradient for the hero section */
+    background: linear-gradient(145deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+}
+
+.header-content {
+    /* Use Dark Blue for the content block for contrast and depth */
+    background: var(--color-dark-blue);
+    padding: 40px 60px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6); 
+    max-width: 800px;
+    transform: translateY(-50px);
+    border: 1px solid var(--color-dark-gray); /* Subtle border for definition */
+}
+
+.header-content h1 {
+    font-size: 4.5em; 
+    font-weight: 900; /* Extra bold for impact */
+    margin-bottom: 0.1em;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    color: var(--color-accent); /* Title uses the bright accent color */
+    text-shadow: 0 0 10px rgba(0, 188, 212, 0.4); /* Neon-like glow */
+}
+
+.header-content p {
+    font-size: 1.3em;
+    font-weight: 300; 
+    opacity: 0.9;
+    padding-top: 15px;
+    border-top: 1px solid var(--color-dark-gray); 
+    margin-top: 20px;
+}
 
 /* --- Overlays Styling (Projects and Links) --- */
 .overlay {
@@ -117,65 +130,100 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    /* Same background as the main page */
+    background: linear-gradient(145deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
     z-index: 100; 
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-.overlay-content {
-    padding: 40px;
-}
-
 .overlay-content h2 {
     font-size: 4em;
-    font-weight: 300; /* Lighter weight for overlay titles */
+    font-weight: 300;
     margin-bottom: 30px;
 }
 
 .coming-soon {
-    font-size: 6em;
+    font-size: 7em;
     font-weight: 900;
-    letter-spacing: 8px;
+    letter-spacing: 10px;
     margin-bottom: 30px;
+    color: var(--color-accent);
+    text-shadow: 0 0 20px rgba(0, 188, 212, 0.6);
 }
 
-/* Close Button for the Overlay */
 .close-overlay {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 40px;
-    line-height: 1;
-    color: #fff;
+    top: 30px;
+    right: 40px;
+    font-size: 50px;
+    color: var(--color-accent);
     background: transparent;
     border: none;
     cursor: pointer;
-    opacity: 0.8;
-    transition: opacity 0.2s;
+    opacity: 0.9;
+    transition: color 0.2s;
 }
 
 .close-overlay:hover {
-    opacity: 1;
+    color: var(--color-text-light);
 }
 
 /* --- Styling for the Discord Button on the Links Page --- */
 .btn-discord {
     display: inline-block;
-    background-color: #7289DA; /* Discord's primary color for professionalism */
-    color: #fff;
+    background-color: #5865F2; /* Official Discord Blue */
+    color: var(--color-text-light);
     padding: 15px 30px;
     margin: 20px 0;
     text-decoration: none;
     border-radius: 8px;
     font-size: 1.2em;
     font-weight: 700;
-    transition: background-color 0.3s ease;
-    cursor: pointer; /* Keep cursor pointer to show it's clickable */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-discord:hover {
-    background-color: #5b6fb8; /* Slightly darker shade on hover */
+    background-color: #4854c8; 
+    transform: translateY(-2px);
+}
+
+/* --- Footer Styling --- */
+#footer {
+    /* Use the Dark Navy Blue for the footer */
+    background-color: var(--color-dark-blue);
+    color: var(--color-text-light);
+    padding: 30px 0;
+    border-top: 2px solid var(--color-dark-gray);
+    font-size: 0.9em;
+}
+
+#footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+
+.copyright {
+    opacity: 0.6;
+    margin: 10px 0;
+}
+
+.footer-nav a {
+    color: var(--color-accent); /* Footer links use the accent color */
+    text-decoration: none;
+    margin-left: 25px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.footer-nav a:hover {
+    opacity: 1;
+    text-decoration: underline;
+    color: var(--color-text-light);
 }
 
 /* --- Media Queries (Responsiveness) --- */
@@ -191,9 +239,25 @@ body {
         margin: 0 15px;
     }
     .header-content h1 {
-        font-size: 3em;
+        font-size: 2.5em;
+        letter-spacing: 0;
+    }
+    .header-content {
+        padding: 30px;
     }
     .coming-soon {
-        font-size: 4em;
+        font-size: 3em;
+        letter-spacing: 5px;
+    }
+    #footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-nav {
+        margin-top: 15px;
+    }
+    .footer-nav a {
+        display: block;
+        margin: 5px 0;
     }
 }
