@@ -14,7 +14,7 @@
             <h1 class="logo">REXY</h1>
             <ul>
                 <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#" id="projects-link">Projects</a></li>
+                <li><a href="projects.html" id="projects-link">Projects</a></li>
                 <li><a href="#" id="links-link">Links</a></li>
             </ul>
         </div>
@@ -26,34 +26,27 @@
             <p>Welcome to the official home page.</p>
         </div>
     </header>
-
-    <div id="projects-overlay" class="overlay">
-        <nav class="overlay-navbar">
-            <div class="container">
-                <h1 class="logo">REXY</h1>
-                <ul>
-                    <li><a href="#home" id="projects-close-home">Home</a></li>
-                    <li><a href="#" class="active">Projects</a></li>
-                    <li><a href="#" id="projects-to-links">Links</a></li>
-                </ul>
+    
+    <section id="main-projects-preview">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="project-grid">
+                <a href="project-detail.html?project=ghost" class="project-card-preview">
+                    <img src="https://i.imgur.com/uNf7q0B.jpeg" alt="Ghost Project Cover">
+                    <h3>Ghost</h3>
+                </a>
+                <a href="project-detail.html?project=panel" class="project-card-preview">
+                    <img src="https://i.imgur.com/8Q9t7wP.jpeg" alt="Panel Project Cover">
+                    <h3>Panel</h3>
+                </a>
+                <a href="project-detail.html?project=nukeslime" class="project-card-preview">
+                    <img src="https://i.imgur.com/82Q2UfG.jpeg" alt="Nuke Slime Project Cover">
+                    <h3>Nuke Slime</h3>
+                </a>
             </div>
-        </nav>
-        <div class="overlay-content">
-            <h2>Projects</h2>
-            <p class="coming-soon">COMING SOON</p>
-            <p>Check back later for updates on my latest work!</p>
+            <a href="projects.html" class="btn-primary">View All Projects</a>
         </div>
-        <footer class="overlay-footer">
-            <div class="container">
-                <p class="copyright">&copy; <span id="current-year-projects"></span> REXY. All rights reserved.</p>
-                <div class="footer-nav">
-                    <a href="#home" class="overlay-close-link">Home</a>
-                    <a href="#" class="active">Projects</a>
-                    <a href="#" id="overlay-projects-to-links">Links</a>
-                </div>
-            </div>
-        </footer>
-    </div>
+    </section>
 
     <div id="links-overlay" class="overlay">
         <nav class="overlay-navbar">
@@ -61,7 +54,7 @@
                 <h1 class="logo">REXY</h1>
                 <ul>
                     <li><a href="#home" id="links-close-home">Home</a></li>
-                    <li><a href="#" id="links-to-projects">Projects</a></li>
+                    <li><a href="projects.html">Projects</a></li>
                     <li><a href="#" class="active">Links</a></li>
                 </ul>
             </div>
@@ -76,7 +69,7 @@
                 <p class="copyright">&copy; <span id="current-year-links"></span> REXY. All rights reserved.</p>
                 <div class="footer-nav">
                     <a href="#home" class="overlay-close-link">Home</a>
-                    <a href="#" id="overlay-links-to-projects">Projects</a>
+                    <a href="projects.html">Projects</a>
                     <a href="#" class="active">Links</a>
                 </div>
             </div>
@@ -88,7 +81,7 @@
             <p class="copyright">&copy; <span id="current-year-home"></span> REXY. All rights reserved.</p>
             <div class="footer-nav">
                 <a href="#home">Home</a>
-                <a href="#" id="footer-projects-link">Projects</a>
+                <a href="projects.html" id="footer-projects-link">Projects</a>
                 <a href="#" id="footer-links-link">Links</a>
             </div>
         </div>
@@ -97,99 +90,54 @@
 
     <script>
         // --- Element Selection ---
-        const projectsLink = document.getElementById('projects-link');
         const linksLink = document.getElementById('links-link');
-        const footerProjectsLink = document.getElementById('footer-projects-link');
         const footerLinksLink = document.getElementById('footer-links-link');
-        const projectsOverlay = document.getElementById('projects-overlay');
         const linksOverlay = document.getElementById('links-overlay');
 
         // New link selectors for navigation within overlays
-        const closeHomeLinks = document.querySelectorAll('.overlay-close-link, #projects-close-home, #links-close-home');
-        const projectsToLinks = document.getElementById('projects-to-links');
-        const linksToProjects = document.getElementById('links-to-projects');
-        const overlayProjectsToLinks = document.getElementById('overlay-projects-to-links');
-        const overlayLinksToProjects = document.getElementById('overlay-links-to-projects');
+        const closeHomeLinks = document.querySelectorAll('.overlay-close-link, #links-close-home');
         
         // --- Utility Functions ---
-        
-        // Helper to set the year for all footers
         function setCurrentYear() {
             const currentYear = new Date().getFullYear();
+            // Note: I've updated the IDs to reflect the new structure
             document.getElementById('current-year-home').textContent = currentYear;
-            document.getElementById('current-year-projects').textContent = currentYear;
             document.getElementById('current-year-links').textContent = currentYear;
         }
 
-        // Function to close an overlay (by navigating to the #home section)
+        // Function to close an overlay 
         function closeOverlay(overlayElement) {
             overlayElement.style.display = 'none';
             document.body.style.overflow = 'auto'; // Restore scrollbar
         }
         
-        // Function to open an overlay
+        // Function to open an overlay (Only for the Links overlay now)
         function openOverlay(overlayElement) {
-            // First, ensure any other overlay is closed (in case of fast clicks)
-            if (overlayElement === projectsOverlay) {
-                closeOverlay(linksOverlay);
-            } else if (overlayElement === linksOverlay) {
-                closeOverlay(projectsOverlay);
-            }
-            
-            document.body.style.overflow = 'hidden'; // Hide body scrollbar when overlay is open
+            document.body.style.overflow = 'hidden'; 
             overlayElement.style.display = 'flex';
         }
         
-        // NEW: Function to ensure the main page is visible on load
+        // Function to ensure the main page is visible on load
         function initializeSiteState() {
-            closeOverlay(projectsOverlay);
-            closeOverlay(linksOverlay);
+            closeOverlay(linksOverlay); // Ensure Links overlay is closed
             setCurrentYear(); // Set copyright years
-            
-            // Explicitly set body overflow to auto on load (important for initial state)
             document.body.style.overflow = 'auto';
         }
 
-        // --- Event Listeners for Opening Overlays (Header & Footer links) ---
-        // Open Projects
-        projectsLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(projectsOverlay); });
-        footerProjectsLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(projectsOverlay); });
-        
+        // --- Event Listeners for Opening Overlays ---
         // Open Links
         linksLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(linksOverlay); });
         footerLinksLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(linksOverlay); });
 
-        // --- Event Listeners for Overlay Navigation / Closing ---
-
-        // Close Overlays by clicking any 'Home' link within an overlay
+        // --- Event Listeners for Overlay Closing ---
+        // Close Links by clicking any 'Home' link within the overlay
         closeHomeLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Find which overlay to close
                 const parentOverlay = link.closest('.overlay');
                 if (parentOverlay) {
                     closeOverlay(parentOverlay);
                 }
-            });
-        });
-
-        // Navigate from Projects to Links (from top nav and footer)
-        [projectsToLinks, overlayProjectsToLinks].forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                // Close Projects, Open Links
-                closeOverlay(projectsOverlay);
-                openOverlay(linksOverlay);
-            });
-        });
-
-        // Navigate from Links to Projects (from top nav and footer)
-        [linksToProjects, overlayLinksToProjects].forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                // Close Links, Open Projects
-                closeOverlay(linksOverlay);
-                openOverlay(projectsOverlay);
             });
         });
         
