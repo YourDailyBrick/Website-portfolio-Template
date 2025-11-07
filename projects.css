@@ -1,0 +1,186 @@
+/* Styling specific to Project Grid and Detail Pages */
+
+/* General page content wrapper */
+.page-content {
+    min-height: 100vh;
+    padding-top: 100px; /* Space for the fixed navbar */
+    padding-bottom: 50px;
+    background-color: var(--color-black);
+}
+
+.page-content h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    color: var(--color-accent);
+}
+
+.page-content .subtitle {
+    font-size: 1.2em;
+    opacity: 0.8;
+    margin-bottom: 40px;
+}
+
+/* --- Project Grid Styles (Used in index.html and projects.html) --- */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 50px 0;
+}
+
+/* Specific styling for the preview section on the index page */
+#main-projects-preview {
+    padding: 80px 0;
+    text-align: center;
+    background-color: var(--color-dark-blue);
+    border-top: 1px solid var(--color-dark-gray);
+}
+
+#main-projects-preview h2 {
+    font-size: 2.5em;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+}
+
+/* Project Card Base Style */
+.project-card,
+.project-card-preview {
+    text-decoration: none;
+    color: var(--color-text-light);
+    background-color: var(--color-dark-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover,
+.project-card-preview:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(58, 123, 213, 0.2);
+}
+
+.project-card img,
+.project-card-preview img {
+    width: 100%;
+    height: 200px; /* Consistent height for covers */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover img,
+.project-card-preview:hover img {
+    transform: scale(1.05);
+}
+
+.card-info,
+.project-card-preview h3 {
+    padding: 15px;
+    text-align: left;
+}
+
+.project-card-preview h3 {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-top: auto; /* Push to the bottom */
+}
+
+.card-info h3 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    color: var(--color-accent);
+}
+
+.card-info p {
+    opacity: 0.7;
+    font-size: 0.9em;
+}
+
+/* --- Project Detail Styles --- */
+
+.detail-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin: 40px 0 60px;
+}
+
+.detail-image {
+    width: 40%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.detail-text {
+    flex-grow: 1;
+    font-size: 1.1em;
+    line-height: 1.8;
+    opacity: 0.9;
+    padding-top: 10px;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 30px;
+}
+
+/* --- Utility Buttons --- */
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-dark-blue);
+    margin-top: 30px;
+    box-shadow: 0 4px 10px rgba(58, 123, 213, 0.5);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent-dark);
+    color: var(--color-text-light);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-accent);
+    color: var(--color-dark-blue);
+}
+
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 768px) {
+    .page-content {
+        padding-top: 120px;
+    }
+    .detail-container {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    .detail-image {
+        width: 100%;
+        max-width: none;
+    }
+    .detail-text {
+        padding-left: 0;
+        border-left: none;
+        padding-top: 20px;
+        border-top: 3px solid var(--color-accent);
+    }
+}
