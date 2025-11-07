@@ -7,7 +7,7 @@
     padding-bottom: 50px;
     background-color: var(--color-black);
 }
-
+/* ... (rest of projects.css remains the same except for the media query below) ... */
 .page-content h1 {
     font-size: 3em;
     font-weight: 700;
@@ -33,7 +33,7 @@
 
 /* Specific styling for the preview section on the index page */
 #main-projects-preview {
-    padding: 80px 0;
+    padding: 40px 0;
     text-align: center;
     background-color: var(--color-dark-blue);
     border-top: 1px solid var(--color-dark-gray);
@@ -88,7 +88,7 @@
 .project-card-preview h3 {
     font-size: 1.4em;
     font-weight: 700;
-    margin-top: auto; /* Push to the bottom */
+    margin-top: auto; 
 }
 
 .card-info h3 {
