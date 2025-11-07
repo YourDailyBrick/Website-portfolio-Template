@@ -112,11 +112,11 @@ body {
     justify-content: center; 
     text-align: center;
     
-    /* MODIFIED: Removed negative margin to fix overlap issue */
-    margin-bottom: 0; 
+    /* CRITICAL FIX 1: Ensure margin is absolutely zero to prevent pull-up */
+    margin-bottom: 0 !important; 
     
-    /* MODIFIED: Added padding-bottom to create separation from the next section */
-    padding-bottom: 100px; 
+    /* CRITICAL FIX 2: Increased padding to create a large gap before next element */
+    padding-bottom: 150px; 
     
     /* NEW: Add padding to accommodate fixed navbar on top */
     padding-top: 80px; 
@@ -151,7 +151,15 @@ body {
     margin-top: 20px;
 }
 
-/* --- Links Overlay Styling --- */
+/* --- Added style for the section FOLLOWING the header (e.g., Projects) --- */
+/* This is a safeguard to ensure a clear space above the content */
+.project-section, 
+main {
+    padding-top: 50px;
+}
+
+
+/* --- Links Overlay Styling (no change) --- */
 .overlay {
     display: none; 
     position: fixed; 
@@ -184,7 +192,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* --- Styling for the Discord Button on the Links Page --- */
+/* --- Styling for the Discord Button on the Links Page (no change) --- */
 .btn-discord {
     display: inline-block;
     background-color: var(--color-accent-dark); 
@@ -204,7 +212,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* --- Footer Styling (Main & Overlay) --- */
+/* --- Footer Styling (Main & Overlay - minor change to undefined color) --- */
 #footer,
 .overlay-footer {
     background-color: var(--color-darker-blue);
@@ -244,8 +252,7 @@ body {
 .footer-nav a:hover {
     opacity: 1;
     text-decoration: underline;
-    /* NOTE: Your original CSS had --color-light here, which is not defined. 
-       I assume you meant --color-text-light for consistency. */
+    /* Corrected undefined color variable */
     color: var(--color-text-light); 
 }
 
@@ -266,17 +273,19 @@ body {
         margin: 0 15px;
     }
 
-    /* CRITICAL FIXES FOR HEADER SCALING (Collision Fix) */
+    /* CRITICAL FIXES FOR HEADER SCALING (Guaranteed Separation) */
     .main-header {
         /* Allow height to be determined by content, not fixed viewport height */
         min-height: auto; 
         
         /* Set a generous padding for breathing room around the header content */
         padding-top: 100px; 
-        padding-bottom: 80px; 
         
-        /* Remove negative margin to stop collision with the next section */
-        margin-bottom: 0; 
+        /* Increased mobile padding for guaranteed separation */
+        padding-bottom: 100px; 
+        
+        /* Force margin to zero */
+        margin-bottom: 0 !important; 
         
         /* Align content back to center for visual balance */
         align-items: center;
@@ -284,18 +293,18 @@ body {
 
     .header-content {
         /* Scale down the container on mobile */
-        padding: 25px 30px; /* Slightly increased padding for better look */
-        width: 95%; /* Make it take up more screen width on mobile */
+        padding: 25px 30px; 
+        width: 95%; 
         /* Ensure content is positioned relative to the top of the header */
         margin-top: 0; 
     }
 
     .header-content h1 {
-        font-size: 2.8em; /* Adjusted size for mobile impact */
+        font-size: 2.8em; 
         letter-spacing: 0;
     }
     .header-content p {
-        font-size: 1.1em; /* Adjusted size for mobile readability */
+        font-size: 1.1em; 
     }
     
     /* Footer and Overlay adjustments (kept) */
