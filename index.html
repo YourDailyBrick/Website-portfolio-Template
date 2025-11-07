@@ -43,6 +43,16 @@
             <p class="coming-soon">COMING SOON</p>
             <p>Check back later for updates on my latest work!</p>
         </div>
+        <footer class="overlay-footer">
+            <div class="container">
+                <p class="copyright">&copy; <span id="current-year-projects"></span> REXY. All rights reserved.</p>
+                <div class="footer-nav">
+                    <a href="#home" class="overlay-close-link">Home</a>
+                    <a href="#" class="active">Projects</a>
+                    <a href="#" id="overlay-projects-to-links">Links</a>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <div id="links-overlay" class="overlay">
@@ -61,11 +71,21 @@
             <a href="https://discord.gg/cPJ7vDDjt6" target="_blank" class="btn-discord">Discord Server</a>
             <p>Find all my official links and social media accounts here.</p>
         </div>
+        <footer class="overlay-footer">
+            <div class="container">
+                <p class="copyright">&copy; <span id="current-year-links"></span> REXY. All rights reserved.</p>
+                <div class="footer-nav">
+                    <a href="#home" class="overlay-close-link">Home</a>
+                    <a href="#" id="overlay-links-to-projects">Projects</a>
+                    <a href="#" class="active">Links</a>
+                </div>
+            </div>
+        </footer>
     </div>
-
+    
     <footer id="footer">
         <div class="container">
-            <p class="copyright">&copy; <span id="current-year"></span> REXY. All rights reserved.</p>
+            <p class="copyright">&copy; <span id="current-year-home"></span> REXY. All rights reserved.</p>
             <div class="footer-nav">
                 <a href="#home">Home</a>
                 <a href="#" id="footer-projects-link">Projects</a>
@@ -85,14 +105,23 @@
         const linksOverlay = document.getElementById('links-overlay');
 
         // New link selectors for navigation within overlays
-        const projectsCloseHome = document.getElementById('projects-close-home');
-        const linksCloseHome = document.getElementById('links-close-home');
+        const closeHomeLinks = document.querySelectorAll('.overlay-close-link, #projects-close-home, #links-close-home');
         const projectsToLinks = document.getElementById('projects-to-links');
         const linksToProjects = document.getElementById('links-to-projects');
+        const overlayProjectsToLinks = document.getElementById('overlay-projects-to-links');
+        const overlayLinksToProjects = document.getElementById('overlay-links-to-projects');
+        
+        // --- Utility Code: Setting Year ---
+        // Helper to set the year for all footers
+        function setCurrentYear() {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('current-year-home').textContent = currentYear;
+            document.getElementById('current-year-projects').textContent = currentYear;
+            document.getElementById('current-year-links').textContent = currentYear;
+        }
 
         // Function to open an overlay
         function openOverlay(overlayElement) {
-            // We use 'flex' to center content, and 'block' for the main site elements
             document.body.style.overflow = 'hidden'; // Hide body scrollbar when overlay is open
             overlayElement.style.display = 'flex';
         }
@@ -112,38 +141,40 @@
         linksLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(linksOverlay); });
         footerLinksLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(linksOverlay); });
 
-        // --- Event Listeners for Overlay Navigation / Closing (Using new nav links) ---
+        // --- Event Listeners for Overlay Navigation / Closing ---
 
-        // Close Projects by clicking Home
-        projectsCloseHome.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeOverlay(projectsOverlay);
-            // Optional: Smooth scroll to home section if needed, though closing overlay is enough.
+        // Close Overlays by clicking any 'Home' link within an overlay
+        closeHomeLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Check which overlay is currently visible/ancestor of the link
+                const parentOverlay = link.closest('.overlay');
+                if (parentOverlay) {
+                    closeOverlay(parentOverlay);
+                }
+            });
         });
 
-        // Close Links by clicking Home
-        linksCloseHome.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeOverlay(linksOverlay);
+        // Navigate from Projects to Links (from top nav and footer)
+        [projectsToLinks, overlayProjectsToLinks].forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeOverlay(projectsOverlay);
+                openOverlay(linksOverlay);
+            });
         });
 
-        // Navigate from Projects to Links
-        projectsToLinks.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeOverlay(projectsOverlay);
-            openOverlay(linksOverlay);
-        });
-
-        // Navigate from Links to Projects
-        linksToProjects.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeOverlay(linksOverlay);
-            openOverlay(projectsOverlay);
+        // Navigate from Links to Projects (from top nav and footer)
+        [linksToProjects, overlayLinksToProjects].forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeOverlay(linksOverlay);
+                openOverlay(projectsOverlay);
+            });
         });
         
-        // --- Utility Code ---
-        // Automatically set the current year for the copyright
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // Run the year function
+        setCurrentYear();
     </script>
 
 </body>
