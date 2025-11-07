@@ -3,9 +3,8 @@
     /* Richer Blue Palette (Preserved) */
     --color-black: #0a0a0a;             /* Deepest Black for background */
     --color-dark-gray: #1e1e1e;         /* Dark Gray for containers */
-    /* UPDATED COLOR: Make it even darker for the footer to contrast better with the black background */
-    --color-darker-blue: #0f1624;       
-    --color-dark-blue: #141c2c;         /* Kept for main header content box */
+    --color-darker-blue: #0f1624;       /* Darker Blue for footer */
+    --color-dark-blue: #141c2c;         /* Dark Navy Blue for accents/footer */
     --color-text-light: #f0f0f0;        /* Near White for main text */
     --color-accent: #3a7bd5;            /* BRIGHTER, RICHER Blue for links/highlights */
     --color-text-header: #5f86b7;       /* Subtler Blue for header text/glow - MATCHES NEW ACCENT */
@@ -107,13 +106,14 @@ body {
 /* --- Main Landing Section (Header) --- */
 .main-header {
     background: linear-gradient(145deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
-    /* FIX: Change height to min-height so it scales down on mobile */
     min-height: 100vh;
     display: flex;
     align-items: center; 
     justify-content: center; 
     text-align: center;
     margin-bottom: -150px; 
+    /* NEW: Add padding to accommodate fixed navbar on top */
+    padding-top: 80px; 
 }
 
 .header-content {
@@ -201,7 +201,6 @@ body {
 /* --- Footer Styling (Main & Overlay) --- */
 #footer,
 .overlay-footer {
-    /* FIX: Use the new darker blue variable for a better contrast/look */
     background-color: var(--color-darker-blue);
     color: var(--color-text-light);
     padding: 30px 0;
@@ -239,11 +238,12 @@ body {
 .footer-nav a:hover {
     opacity: 1;
     text-decoration: underline;
-    color: var(--color-text-light);
+    color: var(--color-light);
 }
 
 /* --- Media Queries (Responsiveness) --- */
 @media (max-width: 768px) {
+    /* Navbar adjustments for better mobile stacking */
     #navbar .container,
     .overlay-navbar .container {
         flex-direction: column;
@@ -257,18 +257,26 @@ body {
     .overlay-navbar ul li {
         margin: 0 15px;
     }
+
+    /* CRITICAL FIXES FOR HEADER SCALING */
     .main-header {
-        /* Adjusted margin for small screens */
-        margin-bottom: -70px; 
-        /* FIX: Ensure header content padding/sizing is small enough */
-        padding-top: 100px;
-        padding-bottom: 50px;
-        min-height: 70vh; /* Reduced height on mobile to prevent excessive scrolling */
+        /* Drastically reduce height on small screens */
+        min-height: 50vh; 
+        /* Reset padding-top for mobile as the navbar will be taller */
+        padding-top: 120px; 
+        /* Adjust negative margin to pull the projects section closer */
+        margin-bottom: -50px; 
+        /* Prevent content from sticking to the bottom on short screens */
+        align-items: flex-start;
     }
+
     .header-content {
         /* Scale down the container on mobile */
         padding: 20px 30px;
+        /* Ensure content is positioned relative to the top of the header */
+        margin-top: 0; 
     }
+
     .header-content h1 {
         font-size: 2.5em;
         letter-spacing: 0;
@@ -276,6 +284,8 @@ body {
     .header-content p {
         font-size: 1em;
     }
+    
+    /* Footer and Overlay adjustments (kept) */
     #footer .container,
     .overlay-footer .container {
         flex-direction: column;
