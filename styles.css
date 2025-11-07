@@ -1,4 +1,4 @@
-]/* --- Color Palette --- */
+/* --- Color Palette --- */
 :root {
     /* Richer Blue Palette (Preserved) */
     --color-black: #0a0a0a;             /* Deepest Black for background */
@@ -108,12 +108,12 @@ body {
     background: linear-gradient(145deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
     min-height: 100vh;
     display: flex;
-    align-items: center; /* Centers vertically */
+    align-items: center; 
     justify-content: center; 
     text-align: center;
-    /* FIX: Reduce negative margin significantly to create space between sections */
-    margin-bottom: -50px; 
-    padding-top: 0; /* Remove padding-top here since align-items: center handles placement */
+    margin-bottom: -150px; 
+    /* NEW: Add padding to accommodate fixed navbar on top */
+    padding-top: 80px; 
 }
 
 .header-content {
@@ -123,8 +123,6 @@ body {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6); 
     max-width: 800px;
     border: 1px solid var(--color-dark-gray); 
-    /* FIX: Add margin-top to push content down past the fixed header */
-    margin-top: 80px; 
 }
 
 .header-content h1 {
@@ -260,26 +258,23 @@ body {
         margin: 0 15px;
     }
 
-    /* CRITICAL FIXES FOR HEADER SCALING AND SPACING */
+    /* CRITICAL FIXES FOR HEADER SCALING */
     .main-header {
-        /* FIX: Increase height to give content space (taller container) */
-        min-height: 80vh; 
-        /* Ensure content is positioned relative to the top of the header */
+        /* Drastically reduce height on small screens */
+        min-height: 50vh; 
+        /* Reset padding-top for mobile as the navbar will be taller */
+        padding-top: 120px; 
+        /* Adjust negative margin to pull the projects section closer */
+        margin-bottom: -50px; 
+        /* Prevent content from sticking to the bottom on short screens */
         align-items: flex-start;
-        /* Pull projects section closer */
-        margin-bottom: -50px;
-        /* Reset padding for mobile */
-        padding-top: 0; 
     }
 
     .header-content {
-        /* FIX: Push content down past the fixed navbar and ensure vertical centering in the remaining space */
-        margin-top: 120px; 
-        /* Center horizontally */
-        margin-left: auto;
-        margin-right: auto;
         /* Scale down the container on mobile */
         padding: 20px 30px;
+        /* Ensure content is positioned relative to the top of the header */
+        margin-top: 0; 
     }
 
     .header-content h1 {
