@@ -28,8 +28,17 @@
     </header>
 
     <div id="projects-overlay" class="overlay">
+        <nav class="overlay-navbar">
+            <div class="container">
+                <h1 class="logo">REXY</h1>
+                <ul>
+                    <li><a href="#home" id="projects-close-home">Home</a></li>
+                    <li><a href="#" class="active">Projects</a></li>
+                    <li><a href="#" id="projects-to-links">Links</a></li>
+                </ul>
+            </div>
+        </nav>
         <div class="overlay-content">
-            <button class="close-overlay">&times;</button>
             <h2>Projects</h2>
             <p class="coming-soon">COMING SOON</p>
             <p>Check back later for updates on my latest work!</p>
@@ -37,8 +46,17 @@
     </div>
 
     <div id="links-overlay" class="overlay">
+        <nav class="overlay-navbar">
+            <div class="container">
+                <h1 class="logo">REXY</h1>
+                <ul>
+                    <li><a href="#home" id="links-close-home">Home</a></li>
+                    <li><a href="#" id="links-to-projects">Projects</a></li>
+                    <li><a href="#" class="active">Links</a></li>
+                </ul>
+            </div>
+        </nav>
         <div class="overlay-content">
-            <button class="close-overlay">&times;</button>
             <h2>Links</h2>
             <a href="https://discord.gg/cPJ7vDDjt6" target="_blank" class="btn-discord">Discord Server</a>
             <p>Find all my official links and social media accounts here.</p>
@@ -65,47 +83,65 @@
         const footerLinksLink = document.getElementById('footer-links-link');
         const projectsOverlay = document.getElementById('projects-overlay');
         const linksOverlay = document.getElementById('links-overlay');
-        const closeButtons = document.querySelectorAll('.close-overlay');
+
+        // New link selectors for navigation within overlays
+        const projectsCloseHome = document.getElementById('projects-close-home');
+        const linksCloseHome = document.getElementById('links-close-home');
+        const projectsToLinks = document.getElementById('projects-to-links');
+        const linksToProjects = document.getElementById('links-to-projects');
 
         // Function to open an overlay
         function openOverlay(overlayElement) {
+            // We use 'flex' to center content, and 'block' for the main site elements
+            document.body.style.overflow = 'hidden'; // Hide body scrollbar when overlay is open
             overlayElement.style.display = 'flex';
         }
 
-        // Function to close an overlay
+        // Function to close an overlay (by navigating to the #home section)
         function closeOverlay(overlayElement) {
             overlayElement.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrollbar
         }
 
-        // Event listeners for opening (Header links)
-        projectsLink.addEventListener('click', (e) => {
+        // --- Event Listeners for Opening Overlays (Header & Footer links) ---
+        // Open Projects
+        projectsLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(projectsOverlay); });
+        footerProjectsLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(projectsOverlay); });
+        
+        // Open Links
+        linksLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(linksOverlay); });
+        footerLinksLink.addEventListener('click', (e) => { e.preventDefault(); openOverlay(linksOverlay); });
+
+        // --- Event Listeners for Overlay Navigation / Closing (Using new nav links) ---
+
+        // Close Projects by clicking Home
+        projectsCloseHome.addEventListener('click', (e) => {
             e.preventDefault();
-            openOverlay(projectsOverlay);
+            closeOverlay(projectsOverlay);
+            // Optional: Smooth scroll to home section if needed, though closing overlay is enough.
         });
 
-        linksLink.addEventListener('click', (e) => {
+        // Close Links by clicking Home
+        linksCloseHome.addEventListener('click', (e) => {
             e.preventDefault();
+            closeOverlay(linksOverlay);
+        });
+
+        // Navigate from Projects to Links
+        projectsToLinks.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeOverlay(projectsOverlay);
             openOverlay(linksOverlay);
         });
 
-        // Event listeners for opening (Footer links)
-        footerProjectsLink.addEventListener('click', (e) => {
+        // Navigate from Links to Projects
+        linksToProjects.addEventListener('click', (e) => {
             e.preventDefault();
+            closeOverlay(linksOverlay);
             openOverlay(projectsOverlay);
         });
         
-        footerLinksLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            openOverlay(linksOverlay);
-        });
-        
-        // Event listener for closing (applies to all close buttons)
-        closeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                closeOverlay(button.closest('.overlay'));
-            });
-        });
-        
+        // --- Utility Code ---
         // Automatically set the current year for the copyright
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
